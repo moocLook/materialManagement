@@ -35,5 +35,23 @@ public class UserController {
         return "redirect:/userController/findAll";
     }
 
+    @RequestMapping("login")
+    public String login(User u,Model model)
+    {
+        User user=userService.login(u.getId(),u.getPassword());
+        if(user!=null)
+        {
+            // 登陆成功
+            model.addAttribute("user",user);
+            return user.getDepartment();//根据部门跳转到不同界面,一共有4种类型
+
+        }else
+        {
+            //todo 返回用户名或密码错误
+            return "";
+        }
+
+    }
+
 
 }
