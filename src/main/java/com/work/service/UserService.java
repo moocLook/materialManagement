@@ -14,4 +14,12 @@ public interface UserService {
     public List<User> findAllUser();
     //保存用户信息
     public void addUser(User user);
+
+    /**
+     * 获取某个职位的所有人的信息
+     * @return
+     */
+    public List<User> findAllByPosition(String department,String position);
+
+
 }

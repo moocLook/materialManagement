@@ -23,7 +23,13 @@ public class MaterialController {
     @Autowired
     MaterialService materialService;
 
-    //跳转到新建物资信息界面
+
+
+    /**
+     * 跳转到新建物资信息界面
+     * @param model
+     * @return
+     */
     @RequestMapping("toAddMaterial")
     public String toAddMaterial(Model model)
     {
@@ -39,7 +45,13 @@ public class MaterialController {
         model.addAttribute("listCompany",companyList);
         return "";
     }
-    //跳转到查询物资信息界面,需要有所有公司信息以及材料分类信息.
+
+
+    /**
+     * 跳转到查询物资信息界面,需要有所有公司信息以及材料分类信息.
+     * @param model
+     * @return
+     */
     @RequestMapping("toFindMaterial")
     public String toFindMaterial(Model model)
     {
@@ -58,8 +70,14 @@ public class MaterialController {
         return "";
     }
 
-    //新建物资信息
     //测试信息 http://localhost:8080/material/addMaterial?name=%E9%BB%84%E9%87%91&unit=%E5%85%8B&companyId=1
+
+    /**
+     * 新建物资信息
+     * @param material  要添加的物资信息
+     * @param companyId  供货商的id
+     * @return
+     */
     @RequestMapping("addMaterial")
     @ResponseBody
     public int addMaterial(Material material,Integer companyId)
@@ -68,7 +86,13 @@ public class MaterialController {
         return 1;
     }
 
-    //查询物资信息
+
+
+    /**
+     * 查询物资信息
+     * @param companyInfo
+     * @return
+     */
     @RequestMapping("findMaterial")
     public String findMaterial(CompanyInfo companyInfo)
     {

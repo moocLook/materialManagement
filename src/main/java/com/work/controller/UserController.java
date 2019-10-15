@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -18,7 +20,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
+    /**
+     * 查找所有用户
+     * @param model
+     * @return
+     */
     @RequestMapping("findAll")
     public String findAll(Model model)
     {
@@ -35,20 +41,25 @@ public class UserController {
         return "redirect:/userController/findAll";
     }
 
+    /**
+     * 登陆
+     * @param u  用户名和密码
+     * @return
+     */
     @RequestMapping("login")
-    public String login(User u,Model model)
+    @ResponseBody
+    public int login(User u, HttpServletRequest request)
     {
         User user=userService.login(u.getId(),u.getPassword());
         if(user!=null)
         {
             // 登陆成功
-            model.addAttribute("user",user);
-            return user.getDepartment();//根据部门跳转到不同界面,一共有4种类型
+            request.getSession().setAttribute("loginUser",user);
+            return 1;
 
         }else
         {
-            //todo 返回用户名或密码错误
-            return "";
+            return -1;
         }
 
     }

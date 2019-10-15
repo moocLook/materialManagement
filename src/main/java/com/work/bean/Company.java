@@ -1,5 +1,8 @@
 package com.work.bean;
 
+/**
+ * 用于保存公司的信息
+ */
 public class Company {
     private Integer id;
     private  String name;
